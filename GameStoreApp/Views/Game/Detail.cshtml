@@ -1,0 +1,27 @@
+﻿@model Game
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-6">
+        <a href="#" class="thumbnail">
+            <img src='@Url.Content("~/Content/images/"+Model.ImagePath)' class="img-responsive img-rounded">
+        </a>
+    </div>
+    <div class="col-md-6">
+        <h2>@Model.Title</h2>
+        <p><i class="glyphicon glyphicon-calendar"></i> @Model.ReleaseDate.ToShortDateString()</p>
+        <p><strong>Stock's Unit :</strong> @Model.Count</p>
+        <p><strong>Price:</strong> <i class="text-success">@Model.Price.ToString("C2")</i></p>
+        <p><a href='@Url.Action("RentTheGame","Game",new {Id=Model.Id})' class="btn btn-success" role="button"><i class="glyphicon glyphicon-shopping-cart"></i> Rent the Game</a></p>
+        <p>
+            <a href='@Url.Action("Index","Home")' class="btn btn-warning btn-lg">
+                <i class="glyphicon glyphicon-arrow-left"></i> Go Back To List
+            </a>
+        </p>
+        <p class="pull-right">
+            <img src='@Url.Content("~/Content/images/pegi/"+Model.PegiRating.ToString()+".jpg")' class="img-responsive img-rounded" />
+        </p>
+    </div>
+</div>

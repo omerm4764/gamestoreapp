@@ -1,0 +1,79 @@
+﻿@model GameCreateOrUpdateVM
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("Create", "Game", FormMethod.Post, new { @class = "form-horizontal" , enctype = "multipart/form-data" }))
+        {
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            @Html.LabelFor(x => x.GenreId)
+                            @Html.DropDownListFor(x => x.GenreId, Model.Genres, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.GenreId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            @Html.LabelFor(x => x.Title)
+                            @Html.TextBoxFor(x => x.Title, new { placeholder = "Title", @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Title, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            @Html.LabelFor(x => x.PegiRating)
+                            @Html.EnumDropDownListFor(x => x.PegiRating, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.PegiRating, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            @Html.LabelFor(x => x.Count)
+                            @Html.TextBoxFor(x => x.Count, new { placeholder = "Price", @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Count, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            @Html.LabelFor(x => x.Price)
+                            @Html.TextBoxFor(x => x.Price, new { placeholder = "Price", @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Price, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            @Html.LabelFor(x => x.ReleaseDate)
+                            @Html.TextBoxFor(x => x.ReleaseDate, new { placeholder = "Released Date", @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.ReleaseDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            <label for="file">Please Select a image for the game</label>
+                            <input type="file" name="file" id="file" value="" accept="image/*" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            @Html.LabelFor(x => x.Description)
+                            @Html.TextAreaFor(x => x.Description, new { placeholder = "Title", @class = "form-control", cols = "50", rows = "10" })
+                            @Html.ValidationMessageFor(x => x.Description, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10">
+                    <input type="submit" name="save" value="Create" class="btn btn-success btn-lg" />
+                </div>
+            </div>
+        }
+    </div>
+</div>

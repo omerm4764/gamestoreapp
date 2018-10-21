@@ -1,0 +1,92 @@
+﻿@model PagedList.IPagedList<Game>
+@using PagedList.Mvc
+@{
+
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Game Store</h1>
+    <p class="lead">You can rent any game with this app</p>
+</div>
+
+<div class="row">
+    @if (Model != null && Model.Count > 0)
+    {
+        <div class="col-md-12">
+            <div class="search-container">
+                @using (Html.BeginForm("Search", "Home", FormMethod.Get, new {  }))
+                {
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">Go!</button>
+                        </span>
+                        <input type="text" class="form-control" placeholder="Search for..." name="keyword">
+                    </div><!-- /input-group -->
+                }
+            </div>
+        </div>
+        <hr />
+        foreach (var item in Model)
+        {
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <img src='@Url.Content("~/Content/images/" + item.ImagePath)' alt="..." class="img-responsive img-h">
+                    <div class="caption">
+                        <h3>@item.Title</h3>
+                        <p><i class="glyphicon glyphicon-calendar"></i> @item.ReleaseDate</p>
+                        <p><a href='@Url.Action("Detail", "Game", new { Id = item.Id })' class="btn btn-primary" role="button">Detail</a></p>
+                    </div>
+                </div>
+            </div>
+        }
+        <hr /><br />
+       
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert">
+            <p>There is no game on the list</p>
+        </div>
+    }
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <div class="pager text-center">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("Index", "Home", new { page }))
+        </div>
+    </div>
+</div>
+
+@section styles{
+    <style>
+        .img-h {
+            height: 188px !important;
+            width:100%;
+        }
+    </style>
+}
+
+<!-- #region old description -->
+@*<div class="col-md-4">
+        <h2>Getting started</h2>
+        <p>
+            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+            enables a clean separation of concerns and gives you full control over markup
+            for enjoyable, agile development.
+        </p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Get more libraries</h2>
+        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Web Hosting</h2>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    </div>*@
+<!-- #endregion -->

@@ -1,0 +1,42 @@
+﻿@model ICollection<RentalGame>
+@{
+    ViewBag.Title = "RentalGames";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (User.Identity.IsAuthenticated)
+{
+    <h1>Rented Games by @User.Identity.Name</h1>
+    <div class="row">
+        @if (Model != null && Model.Count > 0)
+        {
+            <hr />
+            foreach (var item in Model)
+            {
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                        <img src='@Url.Content("~/Content/images/" + item.Game.ImagePath)' alt="..." class="img-responsive img-h">
+                        <div class="caption">
+                            <h3>@item.Game.Title</h3>
+                            <label class="label label-danger">Rented Game</label>
+                            <p><i class="glyphicon glyphicon-calendar"></i> @item.Game.ReleaseDate</p>
+                            <p><a href='@Url.Action("Detail", "Game", new { Id = item.GameId })' class="btn btn-primary" role="button">Detail</a></p>
+                        </div>
+                    </div>
+                </div>
+            }
+            <hr /><br />
+
+        }
+        else
+        {
+            <div class="alert alert-danger" role="alert">
+                <p>There is not a game on list</p>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p class="alert alert-danger">You are not authenticated user!</p>
+}
+

@@ -1,0 +1,54 @@
+﻿@model  ICollection<Genre>
+@{
+    ViewBag.Title = "Genre Manager";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-12">
+        <p>
+            <a href='@Url.Action("Create","Genre")' class="btn btn-success btn-sm">
+                <i class="glyphicon glyphicon-plus-sign"></i> Create New Genre
+            </a>
+        </p>
+    </div>
+    @if (Model != null && Model.Count > 0)
+    {
+        <div class="col-md-12">
+            <table class="table table-hover table-responsive table-striped">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Title</td>
+                            <td>@item.Description</td>
+                            <td>
+                                <p>
+                                    <a href='@Url.Action("Edit", "Genre", new { Id = item.Id })' class="btn btn-warning btn-sm">Edit</a>
+                                    <a href='@Url.Action("Delete", "Genre", new { Id = item.Id })' class="btn btn-danger btn-sm">Delete</a>
+                                </p>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+
+        <div class="col-md-12">
+            <div class="alert alert-danger" role="alert">
+                <p>There is not a genre on list</p>
+            </div>
+        </div>
+    }
+</div>
+
+
